@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Location</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center">Select a location:</h1>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="location">Choose a location:</label>
+                                <select class="form-control" name="location" id="location">
+                                    {% for d in location %}
+                                    <option value="{{ d.name }}">{{ d.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if filtered_visitors %}
+    <div class="container mt-5">
+        <h1>Blocked Add</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Ad Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Ad Location</th>
+                    <th>Visited Location</th>
+                    <th>DailyVisitor Date</th>
+                    <th>Visitor Count</th>
+                    <th>Ad Block</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in filtered_visitors %}
+                <tr>
+                    <td>{{ data.ad.name }}</td>
+                    <td>{{ data.ad.start_date }}</td>
+                    <td>{{ data.ad.end_date }}</td>
+                    <td>{{ data.ad.locations.all|join:", " }}</td>
+                    <td>{{ data.location.name }}</td>
+                    <td>{{ data.date }}</td>
+                    <td>{{ data.visitor_count }}</td>
+                    <td>{{ data.is_blocked }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+
+
+    {% if filtered2 %}
+    <div class="container mt-5">
+        <h1>unblock Add</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Ad Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Ad Location</th>
+                    <th>Visited Location</th>
+                    <th>DailyVisitor Date</th>
+                    <th>Visitor Count</th>
+                    <th>Ad Block</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in filtered2 %}
+                <tr>
+                    <td>{{ data.ad.name }}</td>
+                    <td>{{ data.ad.start_date }}</td>
+                    <td>{{ data.ad.end_date }}</td>
+                    <td>{{ data.ad.locations.all|join:", " }}</td>
+                    <td>{{ data.location.name }}</td>
+                    <td>{{ data.date }}</td>
+                    <td>{{ data.visitor_count }}</td>
+                    <td>{{ data.is_blocked }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

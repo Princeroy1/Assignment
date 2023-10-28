@@ -1,0 +1,15 @@
+Api end point
+
+******for ads
+api/ads/location/    for ads spicific location
+api/ads/create/      for post ads
+ads/del/id/          for delete ads
+ads/update/id/       for update ads
+****for locations
+
+locations/add/     add location post
+locations/id/      GET, PUT, PATCH, DELETE
+
+*********vistors
+api/visitors/    POST
+api/visitors/id/  GET, PUT, PATCH, DELETE
